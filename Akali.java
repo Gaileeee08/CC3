@@ -3,12 +3,21 @@ import java.awt.*;
 import javax.swing.JFrame;
 import java.awt.event.*;
 import javax.swing.JOptionPane;
+import javax.swing.JLabel;
 
-public class Akali extends Panel {
+public class Akali extends Panel implements KeyListener {
 
     static String name = "";
     static Color color;
-
+     static JLabel label1;
+     static int a = 360;
+   
+    
+    public Akali(){
+       this.addKeyListener(this);
+       
+    }
+    @Override
     public void paint(Graphics g) {
         g.setColor(Color.WHITE);
         g.fillArc(100, 100, 700, 800, 0, 180);
@@ -21,15 +30,16 @@ public class Akali extends Panel {
         g.setColor(color);
         g.fillRoundRect(325, 500, 80, 160, 100, 300);
         g.fillRoundRect(495, 500, 80, 160, 100, 140);
-
+        
+        //arms
         g.setColor(color);
-        g.fillArc(200, 360, 180, 60, 40, 360);
-        g.fillArc(520, 360, 180, 60, 150, 360);
+        g.fillArc(200, 360, 180, 60, 40, a); //200 , 360 ,180, 60, 40, a=360
+        g.fillArc(520, 360, 180, 60, 150, a); // 520 , 360 ,180, 60, 150, b =360
 
         g.setColor(color);
         g.fillRect(325, 310, 250, 255);
 
-        //facce
+        //face
         g.setColor(color);
         g.fillOval(300, 150, 300, 280);
         g.setColor(Color.DARK_GRAY);
@@ -43,12 +53,7 @@ public class Akali extends Panel {
         g.fillOval(390, 310, 10, 10);
         g.fillOval(500, 310, 10, 10);
         
-        g.setColor(Color.blue);
-        int [] x = {350,550,100,200};
-        int [] y = {200,400,300,200};
-        
-        g.drawPolygon(x,y,2);
-        
+       
         
         //name
         g.setColor(Color.BLACK);
@@ -74,6 +79,14 @@ public class Akali extends Panel {
         } else if (choice.equalsIgnoreCase("Black")) {
             color = Color.BLACK;
         }
+        
+        
+        
+        
+        
+        
+        
+        
         Akali panel = new Akali();
         panel.setBackground(new Color(63, 53, 15));
         frame.add(panel);
@@ -83,4 +96,28 @@ public class Akali extends Panel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_UP){
+            a = 360;
+         
+        }
+        if(e.getKeyCode() == KeyEvent.VK_DOWN){
+            a = 200;
+           
+            
+        }
+        repaint();
+    }
+    
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+           }
 }
